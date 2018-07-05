@@ -38,7 +38,7 @@ class Comments(models.Model):
     image = models.CharField(max_length=128, blank=True, null=True)
     create_time = models.DateField(blank=True, null=True)
     user = models.ForeignKey('User', models.DO_NOTHING, blank=True, null=True)
-    good = models.ForeignKey('Goods', models.DO_NOTHING, blank=True, null=True)
+    goods = models.ForeignKey('Goods', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -60,7 +60,7 @@ class Goods(models.Model):
     c_price = models.FloatField(blank=True, null=True)
     image = models.CharField(max_length=128, blank=True, null=True)
     describtion = models.CharField(max_length=128, blank=True, null=True)
-    comments = models.IntegerField(blank=True, null=True)
+    comments_amount = models.IntegerField(blank=True, null=True)
     sales_number = models.IntegerField(blank=True, null=True)
     source = models.CharField(max_length=64, blank=True, null=True)
     subclassification = models.ForeignKey('Subclassification', models.DO_NOTHING, blank=True, null=True)
@@ -112,7 +112,7 @@ class SubclassificationBrand(models.Model):
 
 class User(models.Model):
     username = models.CharField(max_length=16, blank=True, null=True)
-    passwoed = models.CharField(max_length=512, blank=True, null=True)
+    password = models.CharField(max_length=512, blank=True, null=True)
     sex = models.IntegerField(blank=True, null=True)
     tel = models.CharField(max_length=11, blank=True, null=True)
     email = models.CharField(max_length=32, blank=True, null=True)
