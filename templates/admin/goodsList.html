@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ECSHOP 管理中心 - 商品列表 </title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/app/admin/admin_page/css/general.css" rel="stylesheet" type="text/css" />
+<link href="/static/app/admin/admin_page/css/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<h1>
+    <span class="action-span"><a href="/goods_manage/goodsAdd/">添加新商品</a></span>
+    <span class="action-span1"><a href="/admin_page/index/">ECSHOP 管理中心</a></span>
+    <span id="search_id" class="action-span1"> - 商品列表 </span>
+    <div style="clear:both"></div>
+</h1>
+<div class="form-div">
+    <form action="" name="searchForm">
+        <img src="/static/Images/icon_search.gif" width="26" height="22" border="0" alt="search" />
+        <!-- 分类 -->
+        <select name="cat_id">
+            <option value="0">所有分类</option>
+            {% for class in classification %}
+            <foreach name="cat_list" item="val">
+            <option value="<{$val.cat_id}>">{{ class.name }}</option>
+            </foreach>
+            {% endfor %}
+        </select>
+        <!-- 品牌 -->
+        <select name="brand_id">
+            <option value="0">所有品牌</option>
+            {% for brand in brandlist %}
+            <foreach name="brand_list" item="val">
+            <option value="<{$val.brand_id}>">{{ brand.name }}</option>
+            </foreach>
+            {% endfor %}
+        </select>
+        <!-- 关键字 -->
+        关键字 <input type="text" name="keyword" size="15" />
+        <input type="submit" value=" 搜索 " class="button" />
+    </form>
+</div>
+
+<!-- 商品列表 -->
+<form method="post" action="" name="listForm" onsubmit="">
+    <div class="list-div" id="listDiv">
+        <table cellpadding="3" cellspacing="1">
+            <tr>
+                <th>编号</th>
+                <th>商品名称</th>
+                <th>价格</th>
+                <th>描述</th>
+                <th>评论数</th>
+                <th>销量</th>
+                <th>来源</th>
+                <th>类别</th>
+                <th>品牌</th>
+                <th>操作</th>
+            </tr>
+            <foreach name="list" item="val">
+            <tr>
+                {% for goods in goodslist %}
+                <td align="center">{{ goods.id }}</td>
+                <td align="center" class="first-cell"><span>{{ goods.name }}</span></td>
+                <td align="center"><span onclick="">{{ goods.c_price }}</span></td>
+                <td align="center"><span>{{ goods.description }}</span></td>
+                <td align="center">{{ goods.comments_amount }}</td>
+                <td align="center">{{ goods.sales_number }}</td>
+                <td align="center">{{ goods.source }}</td>
+                <td align="center">{{ goods.subclassification.name }}</td>
+                <td align="center">{{ goods.brand.name }}</td>
+                <td>
+                <a href="#" target="_blank" title="查看"><img src="/static/Images/icon_view.gif" width="16" height="16" border="0" /></a>
+                <a href="#" title="编辑"><img src="/static/Images/icon_edit.gif" width="16" height="16" border="0" /></a>
+                <a href="#" onclick="" title="回收站"><img src="/static/Images/icon_trash.gif" width="16" height="16" border="0" /></a></td>
+
+            </tr>
+                {% endfor %}
+            </foreach>
+        </table>
+    </div>
+</form>
+
+<div id="footer">
+共执行 7 个查询，用时 0.028849 秒，Gzip 已禁用，内存占用 3.219 MB<br />
+版权所有 &copy; 2005-2012 上海商派网络科技有限公司，并保留所有权利。</div>
+</body>
+</html>
