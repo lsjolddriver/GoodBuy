@@ -114,7 +114,7 @@ body {
     <p>
         <span style="float:right; padding:3px 5px;" >
             <a href="javascript:toggleCollapse();">
-                <img id="toggleImg" src="./Images/menu_minus.gif" width="9" height="9" border="0" alt="闭合" />
+                <img id="toggleImg" src="/static/Images/menu_minus.gif" width="9" height="9" border="0" alt="闭合" />
             </a>
         </span>
         <span class="tab-front" id="menu-tab">菜单</span>
@@ -126,11 +126,10 @@ body {
             <li class="explode" key="02_cat_and_goods" name="menu">
             商品管理
                 <ul>
-                    <li class="menu-item"><a href="goodsList.html" target="main-frame">商品列表</a></li>
-                    <li class="menu-item"><a href="goodsAdd.html" target="main-frame">添加新商品</a></li>
-                    <li class="menu-item"><a href="categoryList.html" target="main-frame">商品分类</a></li>
-                    <li class="menu-item"><a href="brandList.html" target="main-frame">商品品牌</a></li>
-                    <li class="menu-item"><a href="goodsTrash.html" target="main-frame">商品回收站</a></li>
+                    <li class="menu-item"><a href="/goods_manage/goodsList/" target="main-frame">商品列表</a></li>
+                    <li class="menu-item"><a href="/goods_manage/goodsAdd/" target="main-frame">添加新商品</a></li>
+                    <li class="menu-item"><a href="/goods_manage/categoryList/" target="main-frame">商品分类</a></li>
+                    <li class="menu-item"><a href="/goods_manage/brandList/" target="main-frame">商品品牌</a></li>
                 </ul>
             </li>
 
@@ -138,8 +137,7 @@ body {
             管理员账号管理
                 <ul>
                     <li class="menu-item"><a href="/admin_user_manage/userList/" target="main-frame">账号列表</a></li>
-                    <li class="menu-item"><a href="/admin_user_manage/userAdd" target="main-frame">添加账号</a></li>
-                    <li class="menu-item"><a href="userMessage.html" target="main-frame">删除账号</a></li>
+                    <li class="menu-item"><a href="/admin_user_manage/userAddPage/" target="main-frame">添加账号</a></li>
                 </ul>
             </li>
         </ul>
@@ -149,14 +147,13 @@ body {
         <div id="help-content"></div>
     </div>
 </div>
-<script type="text/javascript" src="./Js/global.js"></script>
-<script type="text/javascript" src="./Js/utils.js"></script>
-<script type="text/javascript" src="./Js/transport.js"></script>
+<script type="text/javascript" src="/static/Js/global.js"></script>
+<script type="text/javascript" src="/static/Js/utils.js"></script>
+<script type="text/javascript" src="/static/Js/transport.js"></script>
 <script language="JavaScript">
     var collapse_all = "闭合";
     var expand_all = "展开";
     var collapse = true;
-
     function toggleCollapse() {
         var items = document.getElementsByTagName('LI');
         for(i = 0; i < items.length; i++) {
@@ -172,10 +169,9 @@ body {
             }
         }
         collapse = !collapse;
-        document.getElementById('toggleImg').src = collapse ? './Images/menu_minus.gif' : './Images/menu_plus.gif';
+        document.getElementById('toggleImg').src = collapse ? '/static/Images/menu_minus.gif' : './Images/menu_plus.gif';
         document.getElementById('toggleImg').alt = collapse ? collapse_all : expand_all;
     }
-
     function toggleCollapseExpand(obj, status) {
         if (obj.tagName.toLowerCase() == 'li' && obj.className != 'menu-item') {
             for (i = 0; i < obj.childNodes.length; i++) {
@@ -205,53 +201,44 @@ body {
             }
         }
     }
-
     document.getElementById('menu-list').onclick = function(e) {
         var obj = Utils.srcElement(e);
         toggleCollapseExpand(obj);
     }
-
     document.getElementById('tabbar-div').onmouseover = function(e) {
         var obj = Utils.srcElement(e);
         if (obj.className == "tab-back") {
             obj.className = "tab-hover";
         }
     }
-
     document.getElementById('tabbar-div').onmouseout = function(e) {
         var obj = Utils.srcElement(e);
         if (obj.className == "tab-hover") {
             obj.className = "tab-back";
         }
     }
-
     document.getElementById('tabbar-div').onclick = function(e) {
         var obj = Utils.srcElement(e);
         var hlpTab = document.getElementById('help-tab');
         var mnuDiv = document.getElementById('menu-list');
         var hlpDiv = document.getElementById('help-div');
-
         if (obj.id == 'help-tab') {
             mnuTab.className = 'tab-back';
             hlpTab.className = 'tab-front';
             mnuDiv.style.display = "none";
             hlpDiv.style.display = "block";
-
             loc = parent.frames['main-frame'].location.href;
             pos1 = loc.lastIndexOf("/");
             pos2 = loc.lastIndexOf("?");
             pos3 = loc.indexOf("act=");
             pos4 = loc.indexOf("&",pos3);
-
             filename = loc.substring(pos1 + 1, pos2 - 4);
             act = pos4 < 0 ? loc.substring(pos3 + 4) : loc.substring(pos3 + 4,pos4);
             loadHelp(filename,act);
         }
     }
-
     //菜单展合状态处理器
     var ToggleHanlder = new Object();
-
     Object.extend(
         ToggleHanlder ,{
             SourceObject : new Object(),
@@ -268,13 +255,11 @@ body {
                 date.setTime(date.getTime() + 99999999);
                 document.setCookie(this.CookieName, this.SourceObject.toJSONString(),date.toGMTString());
             },
-
             Reset :function() {
                 var date = new Date();
                 date.setTime(date.getTime() + 99999999);
                 document.setCookie(this.CookieName,"{}",date.toGMTString());
             },
-
             Load : function() {
                 if(document.getCookie(this.CookieName) != null) {
                     this.SourceObject = eval("("+ document.getCookie(this.CookieName) +")");
@@ -297,7 +282,6 @@ body {
             }
         }
     );
-
 </script>
 
 </body>
