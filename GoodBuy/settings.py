@@ -1,3 +1,4 @@
+
 """
 Django settings for GoodBuy project.
 
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'app.untils.AccessAmountMiddleWare.AccessAmountMiddleware'
+    'app.untils.UserAuthMiddleware.UserMiddle',
 ]
 
 ROOT_URLCONF = 'GoodBuy.urls'
@@ -144,4 +146,7 @@ SESSION_REDIS = {
     'prefix': 'good_buy',
     'socket_timeout': 10
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
