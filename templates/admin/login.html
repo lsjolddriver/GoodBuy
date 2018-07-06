@@ -21,11 +21,13 @@
           </div>
           <form method="post" action="/admin_page/login/">
               {% csrf_token %}
-              <input name="username" type="text"  value="用户名" onfocus="this.value=''" onblur="if(this.value==''){this.value='用户名'}">
-              <span id="password_text" onclick="this.style.display='none';document.getElementById('password').style.display='block';document.getElementById('password').focus().select();" >密码</span>
-<input name="password" type="password" id="password" style="display:none;" onblur="if(this.value==''){document.getElementById('password_text').style.display='block';this.style.display='none'};"/>
-<input name="verify_code_text" type="text" id="verify_code_text" value="验证码" onfocus="this.value=''" onblur="if(this.value==''){this.value='用户名'}"/>
-<img id="verify_code" name="verify_code" src="/verify_code/" onclick="get_verify_code()"/>
+                <input name="username" type="text"  placeholder="用户名" onfocus="this.placeholder=''" onblur="if(this.value==''){this.placeholder='用户名'}" required>
+                <input name="password" type="password" id="password" placeholder="密码" onfocus="this.placeholder=''" onblur="if(this.value==''){this.placeholder='密码'}" required/>
+                <input name="verify_code_text" type="text" id="verify_code_text" placeholder="验证码" onfocus="this.placeholder=''" onblur="if(this.value==''){this.placeholder='验证码'}" required/>
+                <img id="verify_code" name="verify_code" src="/verify_code/" onclick="get_verify_code()"/>
+            {% if msg %}
+                <li><p style="color: orangered">{{ msg }}</p></li>
+            {% endif %}
               <input value="登录" style="width:100%;" type="submit" >
           </form>
       </div>

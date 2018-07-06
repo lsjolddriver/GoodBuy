@@ -33,16 +33,20 @@ def login(request):
             return render(request, 'admin/login.html', data)
         try:
             user = AdminUser.objects.filter(username=username).first()
-            if not check_password(password, user.password) and not user:
+            if not user:
                 data['code'] = 1003
-                data['msg'] = '用户名或密码错误'
+                data['msg'] = '账号不存在'
+                return render(request, 'admin/login.html', data)
+            if  not check_password(password, user.password):
+                data['code'] = 1004
+                data['msg'] = '密码错误'
                 return render(request, 'admin/login.html', data)
             request.session['admin_user_id'] = user.id
-            data['code'] = 1003
+            data['code'] = 200
             data['user_id'] = user.id
             return HttpResponseRedirect('/admin_page/index/')
         except Exception:
-            data['code'] = 1004
+            data['code'] = 1005
             data['msg'] = '未知错误'
             return render(request,'admin/login.html',data)
 
