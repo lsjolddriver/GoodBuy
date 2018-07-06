@@ -70,6 +70,9 @@
 							<label for="">&nbsp;</label>
 							<input type="checkbox" class="chb"  /> 保存登录信息
 						</li>
+                        {% if msg %}
+                            <li><p style="color: orangered">{{ msg }}</p></li>
+                        {% endif %}
 						<li>
 							<label for="">&nbsp;</label>
 							<input type="submit" value="" class="login_btn" />
@@ -95,7 +98,7 @@
 				<h3>还不是商城用户</h3>
 				<p>现在免费注册成为商城用户，便能立刻享受便宜又放心的购物乐趣，心动不如行动，赶紧加入吧!</p>
 
-				<a href="register.html" class="reg_btn">免费注册 >></a>
+				<a href="/user/user_register" class="reg_btn">免费注册 >></a>
 			</div>
 
 		</div>

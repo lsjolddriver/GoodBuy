@@ -8,6 +8,8 @@
 	<link rel="stylesheet" href="../../../static/css/header.css" type="text/css">
 	<link rel="stylesheet" href="../../../static/css/login.css" type="text/css">
 	<link rel="stylesheet" href="../../../static/css/footer.css" type="text/css">
+    <script type="text/javascript" src="/static/app/home/user/login.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
 </head>
 <body>
 	<!-- 顶部导航 start -->
@@ -35,7 +37,7 @@
 	<!-- 页面头部 start -->
 	<div class="header w990 bc mt15">
 		<div class="logo w990">
-			<h2 class="fl"><a href="index.html"><img src="../../../static/images/logo.png" alt="京西商城"></a></h2>
+			<h2 class="fl"><a href="/home_page/"><img src="../../../static/images/logo.png" alt="京西商城"></a></h2>
 		</div>
 	</div>
 	<!-- 页面头部 end -->
@@ -69,11 +71,11 @@
 						<li class="checkcode">
 							<label for="">验证码：</label>
 							<input type="text"  name="checkcode" required/>
-							<img src= "/verify_code/" width="200" height="40" alt="" />
-							<span>看不清？<a href="">换一张</a></span>
+							<img id="verify_code" src= "/verify_code/" width="200" height="40" alt="" />
+							<span>看不清？<a href="#" onclick="get_verify_code()">换一张</a></span>
 						</li>
                         {% if msg %}
-                        <li color="red">{{ msg }}</li>
+                            <li><p style="color: orangered">{{ msg }}</p></li>
                         {% endif %}
 						<li>
 							<label for="">&nbsp;</label>

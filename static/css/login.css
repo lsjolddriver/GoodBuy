@@ -44,6 +44,7 @@
 .regist .login_btn:hover{background-position: 0 -34px;}
 .regist .login_form p{color: #aaa; margin-left: 60px; margin-top: 5px;}
 .mobile{width:260px; padding: 10px 20px; border: 1px solid #e5e5e5;}
+#verify_code{ cursor: pointer}
 
 .mobile h3{width: 260px;  height: 85px; padding-bottom: 25px; background: url("../images/reg_mobile.png") center center no-repeat;  text-indent: -9999px; border-bottom: 2px solid #ededed;}
 .mobile p{text-align: center; line-height: 25px; color: #999;}
