@@ -6,7 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="/static/app/admin/admin_page/css/general.css" rel="stylesheet" type="text/css" />
 <link href="/static/app/admin/admin_page/css/main.css" rel="stylesheet" type="text/css" />
-<script src="/static/js/echarts.common.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/echarts.common.min.js"></script>
+<script type="text/javascript" src="/static/app/admin/admin_page/js/main.js"></script>
 </head>
 <body>
 <h1>
@@ -15,27 +17,27 @@
     <div style="clear:both"></div>
 </h1>
 <div class="list-div">
-    <table cellspacing='1' cellpadding='3'>
+    <table id="Amount_of_access_table" cellspacing='1' cellpadding='3'>
         <tr>
             <th colspan="4" class="group-title">网站访问量统计信息</th>
         </tr>
         <tr>
             <td width="20%"><a href="#">首页:</a></td>
-            <td width="30%"><strong style="color:red">4</strong></td>
+            <td width="30%"><strong></strong></td>
             <td width="20%"><a href="#">搜索页面:</a></td>
-            <td width="30%"><strong>2</strong></td>
+            <td width="30%"><strong></strong></td>
         </tr>
         <tr>
             <td><a href="#">商品页面:</a></td>
-            <td><strong>3</strong></td>
+            <td><strong></strong></td>
             <td><a href="#">个人中心页面:</a></td>
-            <td><strong>3</strong></td>
+            <td><strong></strong></td>
         </tr>
         <tr>
             <td><a href="#">登录页面:</a></td>
-            <td><strong>2</strong></td>
+            <td><strong></strong></td>
             <td><a href="#">注册页面:</a></td>
-            <td><strong>0</strong></td>
+            <td><strong></strong></td>
         </tr>
 {#        <tr>#}
 {#            <td><a href="#">部分发货订单:</a></td>#}
@@ -45,47 +47,20 @@
 {#        </tr>#}
     </table>
     <div id="Amount_of_access_form" style="width: 1100px;height:300px;"></div>
-    <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('Amount_of_access_form'));
-
-        // 指定图表的配置项和数据
-        var option = {
-            title: {
-                text: '各网站访问量统计图'
-            },
-            tooltip: {},
-            legend: {
-                data:['访问量']
-            },
-            xAxis: {
-                 data: ["首页","搜索页面","商品页面","个人中心页面","注册页面","登录页面"]
-            },
-            yAxis: {},
-            series: [{
-                name: '访问量',
-                type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
-            }]
-        };
-
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-    </script>
-</div>
+    </div>
 <!-- end order statistics -->
 <br />
 <!-- start goods statistics -->
 <div class="list-div">
-    <table cellspacing='1' cellpadding='3'>
+    <table id="Hot_Word_table" cellspacing='1' cellpadding='3'>
         <tr>
             <th colspan="4" class="group-title">热门对比</th>
         </tr>
         <tr>
-            <td width="20%">iphone X:</td>
-            <td width="30%"><strong>20</strong></td>
-            <td width="20%"><a href="#">小米8:</a></td>
-            <td width="30%"><strong style="color:red">7</strong></td>
+            <td><a href="#">iphone X:</a></td>
+            <td><strong>20</strong></td>
+            <td><a href="#">小米8:</a></td>
+            <td><strong>7</strong></td>
         </tr>
         <tr>
             <td><a href="#">iphone8:</a></td>
@@ -99,13 +74,8 @@
             <td><a href="#">荣耀10:</a></td>
             <td><strong>2</strong></td>
         </tr>
-        <tr>
-            <td><a href="#">显示器:</a></td>
-            <td><strong>11</strong></td>
-            <td><a href="#">冰箱:</a></td>
-            <td><strong>2</strong></td>
-        </tr>
     </table>
+    <div id="Hot_Word_from" style="width: 1100px;height:300px;"></div>
 </div>
 <!-- end order statistics -->
 <br />
@@ -117,15 +87,15 @@
         </tr>
         <tr>
             <td width="20%">服务器操作系统:</td>
-            <td width="30%">WINNT (127.0.0.1)</td>
+            <td width="30%">LINUX (CentOS)</td>
             <td width="20%">Web 服务器:</td>
-            <td width="30%">Apache/2.2.22 (Win32) PHP/5.3.8</td>
+            <td width="30%">Nginx</td>
         </tr>
         <tr>
-            <td>PHP 版本:</td>
-            <td>5.3.8</td>
+            <td>PYTHON 版本:</td>
+            <td>3.6.4</td>
             <td>MySQL 版本:</td>
-            <td>5.5.24</td>
+            <td>5.5.56</td>
         </tr>
         <tr>
             <td>安全模式:</td>
@@ -137,7 +107,7 @@
             <td>Socket 支持:</td>
             <td>是</td>
             <td>时区设置:</td>
-            <td>PRC</td>
+            <td>Asia/Shanghai</td>
         </tr>
         <tr>
             <td>GD 版本:</td>
@@ -155,6 +125,6 @@
 </div>
 <div id="footer">
 共执行 29 个查询，用时 0.539249 秒，Gzip 已禁用，内存占用 3.502 MB<br />
-版权所有 &copy; 2005-2012 上海商派网络科技有限公司，并保留所有权利。</div>
+版权所有 &copy; 2018-07-06 成都老司机科技有限公司，并保留所有权利。</div>
 </body>
 </html>

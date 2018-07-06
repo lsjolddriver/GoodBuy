@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'app.untils.AccessAmountMiddleWare.AccessAmountMiddleware'
 ]
 
 ROOT_URLCONF = 'GoodBuy.urls'
@@ -126,3 +127,21 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+SESSION_ENGINE = 'redis_sessions.session'
+
+# SESSION_REDIS_HOST = '118.25.211.249'
+# SESSION_REDIS_PORT = 6379
+# SESSION_REDIS_DB = 1
+# SESSION_REDIS_PASSWORD = 'root'
+# SESSION_REDIS_PREFIX = 'News_hodge'
+
+SESSION_REDIS = {
+    'host': '118.25.211.249',
+    'port': 6379,
+    'db': 1,
+    'password': 'root',
+    'prefix': 'good_buy',
+    'socket_timeout': 10
+}
+

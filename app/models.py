@@ -59,7 +59,7 @@ class Goods(models.Model):
     name = models.CharField(max_length=64, blank=True, null=True)
     c_price = models.FloatField(blank=True, null=True)
     image = models.CharField(max_length=128, blank=True, null=True)
-    describtion = models.CharField(max_length=128, blank=True, null=True)
+    description = models.CharField(max_length=128, blank=True, null=True)
     comments_amount = models.IntegerField(blank=True, null=True)
     sales_number = models.IntegerField(blank=True, null=True)
     source = models.CharField(max_length=64, blank=True, null=True)

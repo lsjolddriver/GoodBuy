@@ -52,7 +52,7 @@ img {
 }
 
 .login {
-	height: 440px;
+	height: 460px;
 	width: 400px;
 	padding: 50px;
 	background-color: #ffffff;
@@ -61,7 +61,7 @@ img {
 	float: right;
 	margin-right: 50px;
 	position: relative;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 .login_logo {
@@ -136,7 +136,6 @@ input[type=button] {
 	line-height: 24px;
 	text-align: center;
 	white-space: nowrap;
-	vertical-align: middle;
 	cursor: pointer;
 	color: #ffffff;
 	background-color: #27A9E3;
@@ -176,4 +175,11 @@ input[type=button] {
 	height: 45px;
 	width: 100%;
 	margin-bottom: 15px;
+	cursor: pointer;
+}
+
+#msg_text{
+	height: 20px;
+	width: 100%;
+	color: orangered;
 }
