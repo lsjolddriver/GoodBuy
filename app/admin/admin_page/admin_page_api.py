@@ -1,23 +1,23 @@
 """
 后台页面
-AUTH:
-DATE:
+AUTH: jason
+DATE: 2018.07.07
 """
-from django.contrib.auth.hashers import check_password,make_password
-from django.core import serializers
+from django.contrib.auth.hashers import check_password
 from django.shortcuts import render
-from django.http.response import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.http.response import JsonResponse, HttpResponseRedirect
 import redis
+from django.views.decorators.http import require_GET, require_http_methods
 
 from GoodBuy.settings import SESSION_REDIS
 from app.models import AdminUser, Hot
 from app.untils.wrapper_code import is_login
 
 # 后台登录
+@require_http_methods(['GET','POST'])
 def login(request):
     if request.method == 'GET':
-        data = {'code':200}
-        return render(request, 'admin/login.html',)
+        return render(request, 'admin/login.html')
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -51,62 +51,66 @@ def login(request):
             return render(request,'admin/login.html',data)
 
 @is_login
+@require_GET
 def admin_page(request):
-    if request.method == 'GET':
-        return render(request, 'admin/index.html')
+    return render(request, 'admin/index.html')
 
 @is_login
+@require_GET
 def admin_top(request):
     return render(request, 'admin/top.html')
 
 @is_login
+@require_GET
 def admin_menu(request):
     return render(request, 'admin/menu.html')
 
 @is_login
+@require_GET
 def admin_main(request):
-    if request.method == 'GET':
-        return render(request, 'admin/main.html')
+    return render(request, 'admin/main.html')
 
 @is_login
+@require_GET
 def admin_main_access(request):
-    if request.method == 'GET':
-        data = {}
-        try:
-            conn = redis.Redis(host=SESSION_REDIS['host'], port=SESSION_REDIS['port'], password=SESSION_REDIS['password'])
-            access_dict = conn.hgetall('access')
-            data['code'] = 200
-            # 把一个字典的键和值全部转码
-            access_list = list(map(lambda x: (x.decode('utf-8'), access_dict[x].decode('utf-8')), access_dict))
-            # access_list.sort(key=lambda x: int(x[1]))
-            access_amount = [i[1] for i in access_list]
-            access_name = [i[0] for i in access_list]
-            data['access_amount'] = access_amount
-            data['access_name'] = access_name
-            return JsonResponse(data)
-        except Exception:
-            data['code'] = 1101
-            data['msg'] = '数据获取失败，请重新加载'
-            return JsonResponse(data)
-
-@is_login
-def admin_main_hotword(request):
-    if request.method == 'GET':
-        data = {}
-        try :
-            hotwords = Hot.objects.filter().order_by('-count')[:6]
-            hotwords_list = [{'value': i.count, 'name': i.word} for i in hotwords]
-            data['code'] = 200
-            data['hotwords'] = hotwords_list
-            return JsonResponse(data)
-        except Exception:
-            data['code'] = 1301
-            data['msg'] = '服务器不堪重负了'
-
+    data = {}
+    try:
+        conn = redis.Redis(host=SESSION_REDIS['host'], port=SESSION_REDIS['port'], password=SESSION_REDIS['password'])
+        access_dict = conn.hgetall('access')
+        data['code'] = 200
+        # 把一个字典的键和值全部转码
+        access_list = list(map(lambda x: (x.decode('utf-8'), access_dict[x].decode('utf-8')), access_dict))
+        # access_list.sort(key=lambda x: int(x[1]))
+        access_amount = [i[1] for i in access_list]
+        access_name = [i[0] for i in access_list]
+        data['access_amount'] = access_amount
+        data['access_name'] = access_name
+        return JsonResponse(data)
+    except Exception:
+        data['code'] = 1101
+        data['msg'] = '数据获取失败，请重新加载'
         return JsonResponse(data)
 
-#
 @is_login
+@require_GET
+def admin_main_hotword(request):
+    data = {}
+    try :
+        hotwords = Hot.objects.filter().order_by('-count')[:6]
+        hotwords_list = [{'value': i.count, 'name': i.word} for i in hotwords]
+        data['code'] = 200
+        data['hotwords'] = ho@is_logintwords_list
+        return JsonResponse(data)
+    except Exception:
+        data['code'] = 1301
+        data['msg'] = '服务器不堪重负了'
+
+    return JsonResponse(data)
+
+#
+
+@require_GET
 def logout(request):
     del request.session['admin_user_id']
     return HttpResponseRedirect('/admin_page/index/')
+
