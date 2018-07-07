@@ -144,7 +144,7 @@ SESSION_REDIS = {
     'db': 1,
     'password': 'root',
     'prefix': 'good_buy',
-    'socket_timeout': 10
+    'socket_timeout': 86400
 }
 
 MEDIA_URL = '/media/'

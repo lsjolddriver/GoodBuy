@@ -3,16 +3,18 @@
 AUTH:
 DATE:
 """
-import jsonify as jsonify
+
 from django.shortcuts import render
-from django.http.response import HttpResponse, JsonResponse
-from django.contrib.auth.hashers import make_password, check_password
+from django.http.response import JsonResponse
+from django.contrib.auth.hashers import make_password
 from app.models import AdminUser
-import base64
 
 # def admin_user_manage(request):
 #     return render(request, 'Hello world')
+from app.untils.wrapper_code import is_login
 
+
+@is_login
 def user_list(request):
     # 管理员列表
     if request.method == 'GET':
@@ -20,9 +22,9 @@ def user_list(request):
         data = {
             'super_name': super_name
         }
+        return render(request, 'admin/userList.html', data)
 
-    return render(request, 'admin/userList.html', data)
-
+@is_login
 def look_user(request):
     # 查看管理员账号密码
     data = request.POST
@@ -47,7 +49,7 @@ def look_user(request):
 
     return JsonResponse(data)
 
-
+@is_login
 def delete_user(request):
     # 删除该管理员账号
     myName = request.POST.get('myName')
@@ -61,11 +63,12 @@ def delete_user(request):
 
 
 
-
+@is_login
 def user_add_page(request):
     # 添加管理员页面
     return render(request, 'admin/userAddPage.html')
 
+@is_login
 def user_add(request):
     # 添加管理员按钮
     if request.method == 'GET':
