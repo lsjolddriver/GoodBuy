@@ -6,6 +6,7 @@ function lookUser(name) {
     }
     $.ajax({
         url: "/admin_user_manage/lookUser/",
+        headers:{"X-CSRFToken":$.cookie('csrftoken')},
         type: "POST",
         data: post_data,
         success: function (data) {
@@ -30,12 +31,14 @@ function deleteUser(name) {
 
         $.ajax({
             url: "/admin_user_manage/deleteUser/",
+            headers:{"X-CSRFToken":$.cookie('csrftoken')},
             type: "POST",
             data: post_data,
             success: function (data) {
 
                 if (data.code == 200) {
                     alert(data.msg)
+                    location.reload()
                 } else {
                     alert(data.code);
                 }

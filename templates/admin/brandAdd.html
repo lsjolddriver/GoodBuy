@@ -16,12 +16,17 @@
     <div style="clear:both"></div>
 </h1>
 <div class="main-div">
+    {% if not OK %}
     <form method="post" action="/goods_manage/brandAdd/"enctype="multipart/form-data" >
+        {% csrf_token %}
         <table cellspacing="1" cellpadding="3" width="100%">
             <tr>
                 <td class="label">品牌名称</td>
                 <td>
                     <input type="text" name="brand_name" maxlength="60" value="" /><font color="red">*</font>
+                     {% if msg %}
+                     <span class="require-field">{{ msg }}</span>
+                     {% endif %}
                     <br>
                     <span class="notice-span"id="superuser">批量添加以","分隔,eg: 苹果,小米,华为</span>
                 </td>
@@ -34,6 +39,10 @@
             </tr>
         </table>
     </form>
+    {% else %}
+    <p style="text-indent: 2em; margin-top: 30px;">
+系统将在 <span id="time">5</span> 秒钟后自动跳转至品牌列表，如果未能跳转，<a href="/goods_manage/brandList/" title="点击访问">请点击</a>。</p>
+    {% endif %}
 </div>
 
 <div id="footer">
@@ -41,5 +50,22 @@
 版权所有 &copy; 2005-2012 上海商派网络科技有限公司，并保留所有权利。</div>
 <script src="/static/js/jquery.min.js"></script>
 <script src="/static/js/brandList.js"></script>
+<script type="text/javascript">
+    var msg = document.getElementById('time').innerText
+    if(msg){
+    delayURL();
+    function delayURL() {
+        var delay = document.getElementById("time").innerHTML;
+        var t = setTimeout("delayURL()", 1000);
+        if (delay > 0) {
+            delay--;
+            document.getElementById("time").innerHTML = delay;
+        } else {
+     clearTimeout(t);
+            window.location.href = "/goods_manage/brandList/";
+        }
+    }
+    }
+</script>
 </body>
 </html>

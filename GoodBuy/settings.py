@@ -82,9 +82,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'goodbuy',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': '442891187',
         'PORT': '3306',
-        'HOST': 'localhost'
+        'HOST': '47.106.122.64'
     }
 }
 

@@ -17,6 +17,7 @@
 
 <!-- 管理员列表 -->
 <form method="post" action="" name="listForm" onsubmit="">
+    {% csrf_token %}
     <div class="list-div" id="listDiv">
         <table cellpadding="3" cellspacing="1">
             <tr>
@@ -26,7 +27,6 @@
             </tr>
             <foreach name="list" item="val">
                 {% for name in super_name %}
-
             <tr>
                 <td align="center">{{ name.id }}</td>
                 <td align="center" id={{ name.id }}><span>{{ name.username }}</span></td>
@@ -47,7 +47,7 @@
 
 <script src="/static/js/jquery.min.js"></script>
 <script src="/static/js/userList.js"></script>
-
+<script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
 
 <div id="footer">

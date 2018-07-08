@@ -79,9 +79,18 @@ def user_add(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         if not all([username, password]):
-            msg = '参数不能为空'
+            msg = '用户名或密码不能为空'
             return render(request, 'admin/userAddPage.html', {'msg': msg})
-        password = make_password(password) # 密文存储
+        # 判断用户名是否存在
+        admin_list = AdminUser.objects.all()
+        for admin in admin_list:
+            if username == admin.username:
+                return render(request, 'admin/userAddPage.html', {'msg': '用户已存在'})
+        # 判断密码长度
+        if len(password) < 6:
+            return render(request, 'admin/userAddPage.html', {'msg': '密码长度过短(建议6位及以上)'})
+        # 密文存储
+        password = make_password(password)
         AdminUser.objects.create(username=username,
                                  password=password,
                                  )

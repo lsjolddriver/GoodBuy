@@ -1,5 +1,5 @@
-function changeCat(word) {
-    var content = window.prompt('请填入修改后的类名,按确认提交', word);
+function changeGoods(word) {
+    var content = window.prompt('请填入修改后的品牌名,按确认提交', word);
         //点击确定后操作
     post_data = {
         'myName': word,
@@ -7,10 +7,10 @@ function changeCat(word) {
     }
     if(content != null){
         $.ajax({
-            url: "/goods_manage/categoryChange/",
+            url: "/goods_manage/brandChange/",
             type: "POST",
-            data: post_data,
             headers:{"X-CSRFToken":$.cookie('csrftoken')},
+            data: post_data,
             success: function (data) {
                 if (data.code == 200) {
                     alert(data.msg)
@@ -26,16 +26,16 @@ function changeCat(word) {
 }
 
 
-function removeCat(word) {
+function removeGoods(word) {
 
     var myName = word
     post_data = {
         'myName': myName,
     }
-    if(confirm("确定删除该分类?")) {
+    if(confirm("确定删除该品牌?")) {
         //点击确定后操作
         $.ajax({
-            url: "/goods_manage/categoryRemove/",
+            url: "/goods_manage/goodsRemove/",
             type: "POST",
             headers:{"X-CSRFToken":$.cookie('csrftoken')},
             data: post_data,
