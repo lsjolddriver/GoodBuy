@@ -3,12 +3,13 @@ function changeCat(word) {
         //点击确定后操作
     post_data = {
         'myName': word,
-        'content': content
+        'content': content,
     }
     if(content != null){
         $.ajax({
             url: "/goods_manage/brandChange/",
             type: "POST",
+            headers:{"X-CSRFToken":$.cookie('csrftoken')},
             data: post_data,
             success: function (data) {
                 if (data.code == 200) {
@@ -26,15 +27,17 @@ function changeCat(word) {
 
 
 function removeCat(word) {
+
     var myName = word
     post_data = {
-        'myName': myName
+        'myName': myName,
     }
     if(confirm("确定删除该品牌?")) {
         //点击确定后操作
         $.ajax({
             url: "/goods_manage/brandRemove/",
             type: "POST",
+            headers:{"X-CSRFToken":$.cookie('csrftoken')},
             data: post_data,
             success: function (data) {
                 if (data.code == 200) {
@@ -47,3 +50,5 @@ function removeCat(word) {
         });
     }
 }
+
+

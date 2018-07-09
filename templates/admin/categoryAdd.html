@@ -16,12 +16,17 @@
     <div style="clear:both"></div>
 </h1>
 <div class="main-div">
+    {% if not OK %}
     <form action="/goods_manage/categoryAdd/" method="post" name="theForm" enctype="multipart/form-data">
+        {% csrf_token %}
         <table width="100%" id="general-table">
             <tr>
                 <td class="label" >分类名称:</td>
                 <td>
                     <input type='text' name='cat_name' maxlength="20" value='' size='27' /> <font color="red">*</font>
+                    {% if msg %}
+                     <span class="require-field">{{ msg }}</span>
+                    {% endif %}
                     <br>
                     <span class="notice-span"id="superuser">批量添加以","分隔,eg: 手机,冰箱,电视</span>
                 </td>
@@ -33,11 +38,32 @@
             <input type="reset" value=" 重置 " />
         </div>
     </form>
+    {% else %}
+    <p style="text-indent: 2em; margin-top: 30px;">
+系统将在 <span id="time">5</span> 秒钟后自动跳转至分类列表，如果未能跳转，<a href="/goods_manage/categoryList/" title="点击访问">请点击</a>。</p>
+    {% endif %}
 </div>
 
 <div id="footer">
 共执行 3 个查询，用时 0.162348 秒，Gzip 已禁用，内存占用 2.266 MB<br />
 版权所有 &copy; 2005-2012 上海商派网络科技有限公司，并保留所有权利。</div>
+<script type="text/javascript">
+    var msg = document.getElementById('time').innerText
+    if(msg){
+    delayURL();
+    function delayURL() {
+        var delay = document.getElementById("time").innerHTML;
+        var t = setTimeout("delayURL()", 1000);
+        if (delay > 0) {
+            delay--;
+            document.getElementById("time").innerHTML = delay;
+        } else {
+     clearTimeout(t);
+            window.location.href = "/goods_manage/categoryList/";
+        }
+    }
+    }
+</script>
 
 </body>
 </html>
