@@ -35,8 +35,9 @@ class Classification(models.Model):
 
 class Comments(models.Model):
     content = models.CharField(max_length=1024, blank=True, null=True)
+    score = models.SmallIntegerField(blank=True, null=True)
     image = models.CharField(max_length=128, blank=True, null=True)
-    create_time = models.DateField(blank=True, null=True)
+    create_time = models.DateField(auto_now_add=True, blank=True, null=True)
     user = models.ForeignKey('User', models.DO_NOTHING, blank=True, null=True)
     goods = models.ForeignKey('Goods', models.DO_NOTHING, blank=True, null=True)
 
@@ -52,7 +53,7 @@ class Focus(models.Model):
     class Meta:
         managed = False
         db_table = 'focus'
-        unique_together = (('goods', 'user'),)
+        # unique_together = (('goods', 'user'),)
 
 
 class Goods(models.Model):
@@ -72,8 +73,8 @@ class Goods(models.Model):
 
 
 class HistoryPrice(models.Model):
-    price = models.FloatField(blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
+    price = models.TextField(blank=True, null=True)
+    date = models.TextField(blank=True, null=True)
     good = models.ForeignKey(Goods, models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
@@ -107,7 +108,7 @@ class SubclassificationBrand(models.Model):
     class Meta:
         managed = False
         db_table = 'subclassification_brand'
-        unique_together = (('brand', 'subclassification'),)
+        # unique_together = (('brand', 'subclassification'),)
 
 
 class User(models.Model):
@@ -116,18 +117,9 @@ class User(models.Model):
     sex = models.IntegerField(blank=True, null=True)
     tel = models.CharField(max_length=11, blank=True, null=True)
     email = models.CharField(max_length=32, blank=True, null=True)
-    icon = models.ImageField(upload_to='icons')
+    icon = models.CharField(max_length=512, blank=True, null=True)
     goods = models.ManyToManyField(Goods, through='Focus')
 
     class Meta:
         managed = False
         db_table = 'user'
-
-
-class UserTicket(models.Model):
-    user = models.ForeignKey(User, models.DO_NOTHING)
-    ticket = models.CharField(max_length=256)
-    out_time = models.DateTimeField()
-
-    class Meta:
-        db_table = 'user_ticket'
