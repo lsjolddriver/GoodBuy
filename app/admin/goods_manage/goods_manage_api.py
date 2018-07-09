@@ -9,6 +9,8 @@ from app.models import Goods, Brand, Classification, SubclassificationBrand
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+# 分页里每页展示的数据数量
+PAGE_DATA_NUMBER = 2
 
 def goods_list(request):
     # 商品列表
@@ -17,7 +19,7 @@ def goods_list(request):
     classification = Classification.objects.all()
 
     # 生成paginator对象,定义每页显示1条记录
-    paginator = Paginator(goods_list, 2)
+    paginator = Paginator(goods_list, PAGE_DATA_NUMBER)
     # 从前端获取当前的页码数,默认为1
     page = request.GET.get('page', 1)
 
@@ -131,7 +133,7 @@ def goods_search(request):
             brandlist = Brand.objects.all()
             classification = Classification.objects.all()
             # 生成paginator对象,定义每页显示1条记录
-            paginator = Paginator(goodslist, 2)
+            paginator = Paginator(goodslist, PAGE_DATA_NUMBER)
             # 从前端获取当前的页码数,默认为1
             page = request.GET.get('page', 1)
 
@@ -165,7 +167,7 @@ def category_list(request):
     # 分类列表
     category_list = Classification.objects.all()
     #生成paginator对象,定义每页显示1条记录
-    paginator = Paginator(category_list, 2)
+    paginator = Paginator(category_list, PAGE_DATA_NUMBER)
     # 从前端获取当前的页码数,默认为1
     page = request.GET.get('page', 1)
 
@@ -260,7 +262,7 @@ def brand_list(request):
     brand_list = Brand.objects.all()
 
     #生成paginator对象,定义每页显示2条记录
-    paginator = Paginator(brand_list, 2)
+    paginator = Paginator(brand_list, PAGE_DATA_NUMBER)
     # 从前端获取当前的页码数,默认为1
     page = request.GET.get('page', 1)
 
@@ -359,7 +361,7 @@ def brand_search(request):
     if request.method == 'POST':
         brand_name = request.POST.get('brand_name')
         brand_list = Brand.objects.filter(name__contains=brand_name)
-        paginator = Paginator(brand_list, 2)
+        paginator = Paginator(brand_list, PAGE_DATA_NUMBER)
         page = request.GET.get('page', 1)
         page = int(page)
         try:

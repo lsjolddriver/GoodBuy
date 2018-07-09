@@ -8,6 +8,7 @@ urlpatterns = [
     path('userAddPage/',admin_user_manage_api.user_add_page),
     path('userAdd/',admin_user_manage_api.user_add),
     path('lookUser/', admin_user_manage_api.look_user),
+    path('EditUserPsd/', admin_user_manage_api.edit_user_psd),
     path('deleteUser/', admin_user_manage_api.delete_user),
 
 ]

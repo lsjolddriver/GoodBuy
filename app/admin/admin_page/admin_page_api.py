@@ -99,6 +99,20 @@ def admin_main_access(request):
         data['msg'] = '数据获取失败，请重新加载'
         return JsonResponse(data)
 
+# 各时间段访问量统计
+@is_login
+@require_GET
+def admin_main_access2(request):
+    data = {}
+    try:
+        conn = redis.Redis(host=SESSION_REDIS['host'], port=SESSION_REDIS['port'], password=SESSION_REDIS['password'])
+        conn
+    except Exception:
+        data['code'] = 1501
+        data['msg'] = '数据获取失败，请重新加载'
+        return JsonResponse(data)
+
+
 # 热门对比词汇统计
 @is_login
 @require_GET
@@ -135,6 +149,6 @@ def admin_focus_goods(request):
 # 退出登录
 @require_GET
 def logout(request):
-    del request.session['admin_user_id']
+    del request.session['admin_user_name']
     return HttpResponseRedirect('/admin_page/index/')
 
