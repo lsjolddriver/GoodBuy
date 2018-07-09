@@ -116,13 +116,13 @@
 <body>
 <div id="header-div">
     <div id="logo-div" style="bgcolor:#000000;">
-        <img src="/static/Images/ecshop_logo.gif" alt="ECSHOP - power for e-commerce" />
+        <img src="/static/images/ecshop_logo.gif" alt="ECSHOP - power for e-commerce" onclick="re_index()" style="cursor: pointer" />
     </div>
     <div id="submenu-div">
         <ul>
-            <li><a href="/testTp" target="_blank">查看网店</a></li>
-            <li><a href="#" target="main-frame">个人设置</a></li>
-            <li style="border-right:none"><a href="#">刷新</a></li>
+            <li><a href="/home_page/index/" target="_blank">查看官网</a></li>
+            <li><a href="#" target="main-frame">{{ admin_user_name }}</a></li>
+            <li style="border-right:none"><a href="/admin_page/index">刷新</a></li>
         </ul>
         <div id="send_info">
             <a href="#" target="main-frame" class="fix-submenu">清除缓存</a>
@@ -130,17 +130,10 @@
         </div>
     </div>
 </div>
-{#<div id="menu-div">#}
-{#    <ul>#}
-{#        <li class="fix-spacel">&nbsp;</li>#}
-{#        <li><a href="__GROUP__/Index/main" target="main-frame">起始页</a></li>#}
-{#        <li><a href="__GROUP__/Goods/goodsList" target="main-frame">商品列表</a></li>#}
-{#        <li><a href="__GROUP__/Order/orderList" target="main-frame">订单列表</a></li>#}
-{#        <li><a href="__GROUP__/Comment/commentList" target="main-frame">用户评论</a></li>#}
-{#        <li><a href="__GROUP__/User/userList" target="main-frame">会员列表</a></li>#}
-{#        <li class="fix-spacer">&nbsp;</li>#}
-{#    </ul>#}
-{#    <br class="clear" />#}
-{#</div>#}
+<script type="text/javascript">
+    function re_index() {
+        location.href = '/admin_page/index'
+    }
+</script>
 </body>
 </html>

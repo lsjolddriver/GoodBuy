@@ -19,4 +19,6 @@ urlpatterns = [
     path('main_access/', admin_page_api.admin_main_access),
     # 热门对比
     path('main_hotword/', admin_page_api.admin_main_hotword),
+    # 商品收藏统计
+    path('main_focus/', admin_page_api.admin_focus_goods),
 ]

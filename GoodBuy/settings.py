@@ -122,7 +122,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
+# Static files (CSS, JavaScript, images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
@@ -144,7 +144,7 @@ SESSION_REDIS = {
     'db': 1,
     'password': 'root',
     'prefix': 'good_buy',
-    'socket_timeout': 86400
+    'socket_timeout': 3600
 }
 
 MEDIA_URL = '/media/'

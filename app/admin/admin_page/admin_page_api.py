@@ -4,13 +4,15 @@ AUTH: jason
 DATE: 2018.07.07
 """
 from django.contrib.auth.hashers import check_password
+from django.core import serializers
+from django.db.models import Count
 from django.shortcuts import render
 from django.http.response import JsonResponse, HttpResponseRedirect
 import redis
 from django.views.decorators.http import require_GET, require_http_methods
 
 from GoodBuy.settings import SESSION_REDIS
-from app.models import AdminUser, Hot
+from app.models import AdminUser, Hot, Focus
 from app.untils.wrapper_code import is_login
 
 # 后台登录
@@ -41,7 +43,7 @@ def login(request):
                 data['code'] = 1004
                 data['msg'] = '密码错误'
                 return render(request, 'admin/login.html', data)
-            request.session['admin_user_id'] = user.id
+            request.session['admin_user_name'] = user.username
             data['code'] = 200
             data['user_id'] = user.id
             return HttpResponseRedirect('/admin_page/index/')
@@ -50,26 +52,32 @@ def login(request):
             data['msg'] = '未知错误'
             return render(request,'admin/login.html',data)
 
+# 后台首页
 @is_login
 @require_GET
 def admin_page(request):
     return render(request, 'admin/index.html')
 
+# 后台头部
 @is_login
 @require_GET
 def admin_top(request):
-    return render(request, 'admin/top.html')
+    return render(request, 'admin/top.html',
+                  {'admin_user_name':request.session['admin_user_name']})
 
+# 后台左边菜单
 @is_login
 @require_GET
 def admin_menu(request):
     return render(request, 'admin/menu.html')
 
+# 后台右边内容
 @is_login
 @require_GET
 def admin_main(request):
     return render(request, 'admin/main.html')
 
+# 各页面访问量统计
 @is_login
 @require_GET
 def admin_main_access(request):
@@ -91,6 +99,7 @@ def admin_main_access(request):
         data['msg'] = '数据获取失败，请重新加载'
         return JsonResponse(data)
 
+# 热门对比词汇统计
 @is_login
 @require_GET
 def admin_main_hotword(request):
@@ -99,7 +108,7 @@ def admin_main_hotword(request):
         hotwords = Hot.objects.filter().order_by('-count')[:6]
         hotwords_list = [{'value': i.count, 'name': i.word} for i in hotwords]
         data['code'] = 200
-        data['hotwords'] = ho@is_logintwords_list
+        data['hotwords'] = hotwords_list
         return JsonResponse(data)
     except Exception:
         data['code'] = 1301
@@ -107,8 +116,23 @@ def admin_main_hotword(request):
 
     return JsonResponse(data)
 
-#
+# 收藏商品统计
+@is_login
+@require_GET
+def admin_focus_goods(request):
+    data = {}
+    try:
+        focus = Focus.objects.filter()
+        all_focus_goods = focus.annotate(sum=Count('goods_id')).values('goods_id','sum','goods__name')
+        focus_goods = list(all_focus_goods.order_by('-sum')[:6])
+        data['code'] = 200
+        data['focus'] = focus_goods
+        return JsonResponse(data)
+    except Exception:
+        data['code'] = 1401
+        data['msg'] = '服务器加载失败'
 
+# 退出登录
 @require_GET
 def logout(request):
     del request.session['admin_user_id']

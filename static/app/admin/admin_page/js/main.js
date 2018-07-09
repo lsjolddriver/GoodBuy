@@ -60,4 +60,14 @@ $(function () {
         }
     },'json')
 
+    $.get("/admin_page/main_focus",function (data) {
+        focus = data.focus
+        if(data.code == '200') {
+            var focus_goods_html = '<tr><th colspan="4" class="group-title">商品收藏排行</th></tr>'
+            for(var i =0; i < focus.length; i++){
+                focus_goods_html += '<tr><td><strong>'+(i+1)+'</strong></td><td><a href="#">'+focus[i].goods__name+'</a></td><td><strong>'+focus[i].sum+'</strong></td></tr>'
+            }
+            $('#focus_goods_table').html(focus_goods_html)
+        }
+    },'json')
 });
