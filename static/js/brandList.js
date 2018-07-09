@@ -14,7 +14,7 @@ function changeCat(word) {
             success: function (data) {
                 if (data.code == 200) {
                     alert(data.msg)
-                    location.reload()
+                    window.location.href='/goods_manage/brandList/';
                 } else {
                     alert(data.code);
                 }
