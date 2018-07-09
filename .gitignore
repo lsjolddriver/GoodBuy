@@ -107,3 +107,9 @@ venv.bak/
 /.idea
 
 *.pyc
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+dist
+build
