@@ -147,6 +147,5 @@ def user_collection(request):
 def user_comment(request):
     user = get_user(request)
     comments = Comments.objects.filter(user=user)
-
     data = {'comments': comments}
     return render(request, 'home/user/comment.html', data)

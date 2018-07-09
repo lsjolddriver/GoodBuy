@@ -19,11 +19,10 @@ def is_login(fn):
     @wraps(fn)
     def wrapper(request, *args, **kwargs):
         try:
-            user_id = request.session['admin_user_id']
-            print(user_id)
+            user = request.session['admin_user_name']
+            print(user)
         except KeyError as e:
-            print('有用户未登录', str(e))
-            return HttpResponseRedirect('/admin_page/login/')
+            return HttpResponseRedirect('/admin_page/login/', {'msg':'请先登录'})
         else:
             return fn(request, *args, **kwargs)
 

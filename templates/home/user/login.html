@@ -71,7 +71,9 @@
 							<input type="checkbox" class="chb"  /> 保存登录信息
 						</li>
                         {% if msg %}
-                            <li><p style="color: orangered">{{ msg }}</p></li>
+                            <li id="J_Message" class="login-msg error">
+                                <p class="error">{{ msg }}</p>
+                            </li>
                         {% endif %}
 						<li>
 							<label for="">&nbsp;</label>

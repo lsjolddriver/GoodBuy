@@ -52,7 +52,7 @@ img {
 }
 
 .login {
-	height: 460px;
+	height: 420px;
 	width: 400px;
 	padding: 50px;
 	background-color: #ffffff;
@@ -61,7 +61,7 @@ img {
 	float: right;
 	margin-right: 50px;
 	position: relative;
-	margin-top: 10px;
+	margin-top: 20px;
 }
 
 .login_logo {
@@ -103,6 +103,7 @@ input[type=text],
 input[type=file],
 input[type=password],
 input[type=email],
+#verify_code,
 select {
 	border: 1px solid #DCDEE0;
 	vertical-align: middle;
@@ -110,7 +111,6 @@ select {
 	height: 45px;
 	padding: 0px 16px;
 	font-size: 14px;
-	color: #555555;
 	outline: none;
 	width: 100%;
 	margin-bottom: 15px;
@@ -173,13 +173,30 @@ input[type=button] {
 
 #verify_code {
 	height: 45px;
-	width: 100%;
-	margin-bottom: 15px;
+	border: none;
+	width: 49%;
 	cursor: pointer;
+	clear: both;
+	padding: 0; !important;
+
+}
+#verify_code_text{
+	width: 49%;
+	clear: both;
+}
+#J_Message{
+    width: 300px;
+	height: 30px;
+    border-color: #ffb4a8;
+    background-color: #fef2f2;
+    color: #f40;
+    line-height: 30px;
+    border: 1px solid;
 }
 
-#msg_text{
-	height: 20px;
-	width: 100%;
-	color: orangered;
+.error{
+    width: 100%;
+    text-align: center;
+    color: orangered;
+    display: inline-block;
 }
