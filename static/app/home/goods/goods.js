@@ -3,7 +3,7 @@
 $(document).ready(function () {
     var path = location.href;
     var pk = path.split('/')[4];
-    $.get('/goods/items/' + pk + '/', function (data) {
+    $.get('/items/' + pk + '/', function (data) {
         $('.summary h3 strong').text(data.data.name);
         new Vue({
             el: "#sum_vue",
@@ -35,7 +35,7 @@ $(document).ready(function () {
        });
     });
 
-    $.get('/goods/is_focus/' + pk + '/', function (data) {
+    $.get('/is_focus/' + pk + '/', function (data) {
             if (data.data.is_focus == true){
                 $('#focussubmit').attr('value', '已收藏')
             }else if (data.data.is_focus == false){
@@ -43,7 +43,7 @@ $(document).ready(function () {
             }
         });
 
-    $.get('/goods/history/' + pk + '/', function (data) {
+    $.get('/history/' + pk + '/', function (data) {
 
         var dates = data.data.date.split(',');
         var prices = data.data.price.split(',');
@@ -75,7 +75,7 @@ $(document).ready(function () {
 
     $('#focus').submit(function (e) {
         e.preventDefault();
-        $.post('/goods/focus/', {'item_id': pk}, function (data) {
+        $.post('/focus/', {'item_id': pk}, function (data) {
             if (data.data.is_focus == true){
                 $('#focussubmit').attr('value', '已收藏')
             }else if (data.data.is_focus == false){
@@ -84,7 +84,7 @@ $(document).ready(function () {
         });
     });
 
-    $.get('/goods/comments/' + pk + '/', function (data) {
+    $.get('/comments/' + pk + '/', function (data) {
         var int_ave_score = Math.round(data.score_data.ave_score);
         if(int_ave_score < 1){
             int_ave_score = 1;
@@ -197,7 +197,7 @@ $(document).ready(function () {
         score = $('input[name=grade]:checked').val();
         content = $('#comments_text').val();
         e.preventDefault();
-        $.post('goods/comments/' + pk + '/', {'goods_id': pk, 'content': content, 'score': score}, function (data) {
+        $.post('/comments/' + pk + '/', {'goods_id': pk, 'content': content, 'score': score}, function (data) {
             $('input[name=grade]').attr('checked', 'off');
             $('#comments_text').val('');
         });
