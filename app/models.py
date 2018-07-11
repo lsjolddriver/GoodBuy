@@ -53,7 +53,7 @@ class Focus(models.Model):
     class Meta:
         managed = False
         db_table = 'focus'
-        # unique_together = (('goods', 'user'),)
+        unique_together = (('goods', 'user'),)
 
 
 class Goods(models.Model):
@@ -108,7 +108,7 @@ class SubclassificationBrand(models.Model):
     class Meta:
         managed = False
         db_table = 'subclassification_brand'
-        # unique_together = (('brand', 'subclassification'),)
+        unique_together = (('brand', 'subclassification'),)
 
 
 class User(models.Model):
@@ -117,9 +117,18 @@ class User(models.Model):
     sex = models.IntegerField(blank=True, null=True)
     tel = models.CharField(max_length=11, blank=True, null=True)
     email = models.CharField(max_length=32, blank=True, null=True)
-    icon = models.CharField(max_length=512, blank=True, null=True)
+    icon = models.ImageField(upload_to='icons')
     goods = models.ManyToManyField(Goods, through='Focus')
 
     class Meta:
         managed = False
         db_table = 'user'
+
+
+class UserTicket(models.Model):
+    user = models.ForeignKey(User, models.DO_NOTHING)
+    ticket = models.CharField(max_length=256)
+    out_time = models.DateTimeField()
+
+    class Meta:
+        db_table = 'user_ticket'
