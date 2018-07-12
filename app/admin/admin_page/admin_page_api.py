@@ -106,7 +106,7 @@ def admin_main_access2(request):
     data = {}
     try:
         conn = redis.Redis(host=SESSION_REDIS['host'], port=SESSION_REDIS['port'], password=SESSION_REDIS['password'])
-        conn
+
     except Exception:
         data['code'] = 1501
         data['msg'] = '数据获取失败，请重新加载'

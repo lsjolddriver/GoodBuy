@@ -21,7 +21,7 @@
           </div>
           <form method="post" action="/admin_page/login/">
               {% csrf_token %}
-                <input name="username" type="text"  placeholder="用户名" onfocus="this.placeholder=''" onblur="if(this.value==''){this.placeholder='用户名'}" required>
+                <input id="username" name="username" type="text"  placeholder="用户名" onfocus="this.placeholder=''" onblur="if(this.value==''){this.placeholder='用户名'}" required>
                 <input name="password" type="password" id="password" placeholder="密码" onfocus="this.placeholder=''" onblur="if(this.value==''){this.placeholder='密码'}" required/>
                 <input name="verify_code_text" type="text" id="verify_code_text" placeholder="验证码" onfocus="this.placeholder=''" onblur="if(this.value==''){this.placeholder='验证码'}" required/>
 
@@ -31,7 +31,7 @@
                         <p class="error">{{ msg }}</p>
                     </li>
                 {% endif %}
-              <input value="登录" style="width:100%;" type="submit" >
+              <input id="submit" value="登录" style="width:100%;" type="submit" >
           </form>
       </div>
 </div>

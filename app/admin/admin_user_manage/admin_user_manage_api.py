@@ -19,7 +19,7 @@ def user_list(request):
     # 管理员列表
     super_name = AdminUser.objects.all()
     is_root = ''
-    if request.session['admin_user_id'] == 1:
+    if request.session['admin_user_name'] == 'root':
         is_root = 'yes'
     data = {
         'super_name': super_name,
@@ -71,7 +71,7 @@ def user_add_page(request):
     # 添加管理员页面
     is_root = ''
     msg = ''
-    if request.session['admin_user_id'] == 1:  # 判断是否为root超级管理员 id = 1
+    if request.session['admin_user_name'] == 'root':  # 判断是否为root超级管理员 id = 1
         is_root = 'OK'
         msg = '欢迎超级管理员!'
     return render(request, 'admin/userAddPage.html', {'msg': msg, 'is_root': is_root})
@@ -85,7 +85,7 @@ def user_add(request):
         return HttpResponseRedirect('/admin_user_manage/userAddPage/')
 
     if request.method == 'POST':
-        if request.session['admin_user_id'] == 1:
+        if request.session['admin_user_name'] == 'root':
             is_root = 'OK'
             username = request.POST.get('username')
             password = request.POST.get('password')
