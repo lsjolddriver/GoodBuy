@@ -35,10 +35,11 @@ class Classification(models.Model):
 
 class Comments(models.Model):
     content = models.CharField(max_length=1024, blank=True, null=True)
+    score = models.SmallIntegerField(blank=True, null=True)
     image = models.CharField(max_length=128, blank=True, null=True)
-    create_time = models.DateField(blank=True, null=True)
+    create_time = models.DateField(auto_now_add=True, blank=True, null=True)
     user = models.ForeignKey('User', models.DO_NOTHING, blank=True, null=True)
-    good = models.ForeignKey('Goods', models.DO_NOTHING, blank=True, null=True)
+    goods = models.ForeignKey('Goods', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -59,8 +60,8 @@ class Goods(models.Model):
     name = models.CharField(max_length=64, blank=True, null=True)
     c_price = models.FloatField(blank=True, null=True)
     image = models.CharField(max_length=128, blank=True, null=True)
-    describtion = models.CharField(max_length=128, blank=True, null=True)
-    comments = models.IntegerField(blank=True, null=True)
+    description = models.CharField(max_length=128, blank=True, null=True)
+    comments_amount = models.IntegerField(blank=True, null=True)
     sales_number = models.IntegerField(blank=True, null=True)
     source = models.CharField(max_length=64, blank=True, null=True)
     subclassification = models.ForeignKey('Subclassification', models.DO_NOTHING, blank=True, null=True)
@@ -72,8 +73,8 @@ class Goods(models.Model):
 
 
 class HistoryPrice(models.Model):
-    price = models.FloatField(blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
+    price = models.TextField(blank=True, null=True)
+    date = models.TextField(blank=True, null=True)
     good = models.ForeignKey(Goods, models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
@@ -112,13 +113,22 @@ class SubclassificationBrand(models.Model):
 
 class User(models.Model):
     username = models.CharField(max_length=16, blank=True, null=True)
-    passwoed = models.CharField(max_length=512, blank=True, null=True)
+    password = models.CharField(max_length=512, blank=True, null=True)
     sex = models.IntegerField(blank=True, null=True)
     tel = models.CharField(max_length=11, blank=True, null=True)
     email = models.CharField(max_length=32, blank=True, null=True)
-    icon = models.CharField(max_length=512, blank=True, null=True)
+    icon = models.ImageField(upload_to='icons')
     goods = models.ManyToManyField(Goods, through='Focus')
 
     class Meta:
         managed = False
         db_table = 'user'
+
+
+class UserTicket(models.Model):
+    user = models.ForeignKey(User, models.DO_NOTHING)
+    ticket = models.CharField(max_length=256)
+    out_time = models.DateTimeField()
+
+    class Meta:
+        db_table = 'user_ticket'

@@ -1,0 +1,65 @@
+{% extends 'home/user/base.html' %}
+{% block content %}
+<div class="content fl ml10">
+			<div class="user_hd">
+				<h3>用户信息</h3>
+			</div>
+
+			<div class="user_bd mt10">
+				<form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+					<ul>
+{#                        <li>#}
+{#							<label for="">头像：</label>#}
+{#                        </li>#}
+{#                            {% if user.icon %}#}
+{#                                <img src="/media/{{ user.icon }}" width="200" height="200" border-radius="50px" alt="">#}
+{#                            {% else %}#}
+{#                                <input name= "icon" type="file">#}
+{#						    {% endif %}#}
+
+						<li>
+                            {% if user.username %}
+							<label for="">用户名：</label>
+							<strong>{{ user.username }}</strong>
+                            {% endif %}
+						</li>
+						<li>
+							<label for="">性别：</label>
+                            {% if user.sex == 1 %}
+							<strong>男</strong>
+                                {% elif user.sex == 0 %}
+                                <strong>女</strong>
+                                {% else %}
+                                <input type="text" name= "sex" class="txt" placeholder="请输入男或女"/>
+						    {% endif %}
+                        </li>
+						<li>
+                        	<label for="">邮箱：</label>
+                            {% if user.email != None %}
+							<strong>{{ user.email }}</strong>
+                                {% else %}
+							<input type="text" name="email" class="txt" placeholder="请输入你的邮箱号"/>
+						    {% endif %}
+                        </li>
+						<li>
+							<label for="">手机号码：</label>
+                            {% if user.tel != None %}
+							<strong>{{ user.tel }}</strong>
+                                {% else %}
+							<input type="text" name="tel" class="txt" placeholder="请输入你的手机号"/>
+						    {% endif %}
+						</li>
+                    {% if msg %}
+                        <li id="error_msg"> {{ msg }} </li>
+                     {% endif %}
+						<li>
+							<label for="">&nbsp;</label>
+							<input type="submit" value="提交" class="sbtn" />
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+		<!-- 右侧内容区域 end -->
+{% endblock %}
