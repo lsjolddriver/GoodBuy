@@ -3,3 +3,4 @@ pymysql
 pillow
 redis
 django-redis-sessions
+djangorestframework
