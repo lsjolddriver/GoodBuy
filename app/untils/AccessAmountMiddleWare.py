@@ -12,6 +12,7 @@ class AccessAmountMiddleware(MiddlewareMixin):
 
     # 增加访问量并保存redis
     def SaveToRedis(self, name):
+
         num = int(self.conn.hget('access', name).decode('utf-8')) + 1 if self.conn.hexists('access', name) else 1
         self.conn.hset('access', name, num)
 
