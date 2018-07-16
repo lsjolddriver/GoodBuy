@@ -3,6 +3,8 @@
 AUTH: jason
 DATE: 2018.07.07
 """
+import time
+
 from django.contrib.auth.hashers import check_password
 from django.core import serializers
 from django.db.models import Count
@@ -37,11 +39,11 @@ def login(request):
             user = AdminUser.objects.filter(username=username).first()
             if not user:
                 data['code'] = 1003
-                data['msg'] = '账号不存在'
+                data['msg'] = '账号或密码错误'
                 return render(request, 'admin/login.html', data)
             if  not check_password(password, user.password):
                 data['code'] = 1004
-                data['msg'] = '密码错误'
+                data['msg'] = '账号或密码错误'
                 return render(request, 'admin/login.html', data)
             request.session['admin_user_name'] = user.username
             data['code'] = 200
@@ -83,16 +85,15 @@ def admin_main(request):
 def admin_main_access(request):
     data = {}
     try:
-        conn = redis.Redis(host=SESSION_REDIS['host'], port=SESSION_REDIS['port'], password=SESSION_REDIS['password'])
-        access_dict = conn.hgetall('access')
-        data['code'] = 200
-        # 把一个字典的键和值全部转码
-        access_list = list(map(lambda x: (x.decode('utf-8'), access_dict[x].decode('utf-8')), access_dict))
-        # access_list.sort(key=lambda x: int(x[1]))
-        access_amount = [i[1] for i in access_list]
-        access_name = [i[0] for i in access_list]
+        conn = redis.StrictRedis(host=SESSION_REDIS['host'], port=SESSION_REDIS['port'], password=SESSION_REDIS['password'],decode_responses=True)
+        access = conn.hgetall('access')
+        access_amount = [0] * 6
+        for val in access.values():
+            for i,num in enumerate(eval(val).values()):
+                access_amount[i] += num
         data['access_amount'] = access_amount
-        data['access_name'] = access_name
+        data['access_name'] = ['首页', '搜索页面', '商品页面', '个人中心页面', '登录页面', '注册页面']
+        data['code'] = 200
         return JsonResponse(data)
     except Exception:
         data['code'] = 1101
@@ -105,8 +106,34 @@ def admin_main_access(request):
 def admin_main_access2(request):
     data = {}
     try:
-        conn = redis.Redis(host=SESSION_REDIS['host'], port=SESSION_REDIS['port'], password=SESSION_REDIS['password'])
+        conn = redis.StrictRedis(host=SESSION_REDIS['host'], port=SESSION_REDIS['port'], password=SESSION_REDIS['password'], decode_responses=True)
+        choice_time = request.GET.get('choice_time')
+        choice_date = request.GET.get('choice_date', '1')
+        today = time.strftime("%Y-%m-%d")
+        data['code'] = 200
+        data['today'] = today
+        access = conn.hgetall('access')
+        if choice_time:
+            access_time_dict = eval(access[choice_time])
+            data['access_amount'] = list(access_time_dict.values())
+            data['access_name'] = list(access_time_dict.keys())
+            return JsonResponse(data)
 
+        if choice_date == '1':
+            access = dict(sorted(list(access.items()))[-7:])
+        if choice_date == '2':
+            access = dict(sorted(list(access.items()))[-30:])
+        if choice_date == '3':
+            access = dict(sorted(list(access.items()))[-90:])
+        data['access_name'] = list(access.keys())
+        access_amount = []
+        for val in access.values():
+            count = 0
+            for num in eval(val).values():
+                count += num
+            access_amount.append(count)
+        data['access_amount'] = access_amount
+        return JsonResponse(data)
     except Exception:
         data['code'] = 1501
         data['msg'] = '数据获取失败，请重新加载'

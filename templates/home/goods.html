@@ -43,9 +43,11 @@
 			</div>
 			<div class="topnav_right fr">
 				<ul>
-					<li>您好，欢迎来到鼓捣买！[<a href="/user/user_login/">登录</a>] [<a href="/user/user_register/">免费注册</a>] </li>
-
-
+					{% if user.username %}
+                        <li>你好!<a href="/user/user_home/">{{ user.username }}</a></li>
+                    {% else %}
+                        <li>您好，欢迎来到鼓捣买！[<a href="/user/user_login/">登录</a>] [<a href="/user/user_register/">免费注册</a>] </li>
+                    {% endif %}
 				</ul>
 			</div>
 		</div>
@@ -58,13 +60,14 @@
 	<div class="header w1210 bc mt15">
 		<!-- 头部上半部分 start 包括 logo、搜索、用户中心和购物车结算 -->
 		<div class="logo w1210">
-			<h1 class="fl"><a href=""><img src="{% static 'images/welcome.png' %}" alt="京西商城"></a></h1>
+			<h1 class="fl"><a href="/index/"><img src="{% static 'images/welcome.png' %}" alt="京西商城"></a></h1>
 			<!-- 头部搜索 start -->
 			<div class="search fl">
 				<div class="search_form">
 					<div class="form_left fl"></div>
-					<form action="" id="search" name="serarch" method="get" class="fl">
-						<input type="text" class="txt" value="请输入商品关键字" /><input type="submit" class="btn" value="搜索" />
+					<form action="/search" id="search" name="serarch" method="get" class="fl">
+						<input type="text" class="txt" placeholder="请输入商品关键字" onfocus="this.placeholder=''" onblur="if(this.value==''){this.placeholder='请输入商品关键字'}" />
+                        <input type="submit" class="btn" value="搜索" />
 					</form>
 					<div class="form_right fl"></div>
 				</div>
@@ -73,24 +76,20 @@
 
 				<div class="hot_search">
 					<strong>热门搜索:</strong>
-					<a href="">D-Link无线路由</a>
-					<a href="">休闲男鞋</a>
-					<a href="">TCL空调</a>
-					<a href="">耐克篮球鞋</a>
 				</div>
 			</div>
 			<!-- 头部搜索 end -->
 
 			<!-- 用户中心 start-->
-			<div class="user fl">
-				<dl>
-					<dt>
-						<em></em>
-						<a href="/user/user_home/">用户中心</a>
-					</dt>
-
-				</dl>
-			</div>
+{#			<div class="user fl">#}
+{#				<dl>#}
+{#					<dt>#}
+{#						<em></em>#}
+{#						<a href="/user/user_home/">用户中心</a>#}
+{#					</dt>#}
+{##}
+{#				</dl>#}
+{#			</div>#}
 			<!-- 用户中心 end-->
 
 		</div>
@@ -106,13 +105,13 @@
 
 			<div class="navitems fl">
 				<ul class="fl">
-					<li class="current"><a href="">首页</a></li>
-					<li><a href="">电脑频道</a></li>
-					<li><a href="">家用电器</a></li>
-					<li><a href="">品牌大全</a></li>
-					<li><a href="">团购</a></li>
-					<li><a href="">积分商城</a></li>
-					<li><a href="">夺宝奇兵</a></li>
+					<li class="current"><a href="{% url 'home_page:home' %}">首页</a></li>
+					<li><a href="">全网比较</a></li>
+					<li><a href="">省钱控</a></li>
+					<li><a href="">国內折扣</a></li>
+					<li><a href="">白菜价</a></li>
+					<li><a href="">历史价格查询</a></li>
+					<li><a href="">更多</a></li>
 				</ul>
 				<div class="right_corner fl"></div>
 			</div>

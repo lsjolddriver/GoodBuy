@@ -60,7 +60,7 @@
 .guide_wrap div{width: 868px; height: 210px; padding:15px 10px 5px;}
 .guide_wrap li{width: 170px; float: left; display: inline; text-align: center;}
 .guide_wrap li dt img{width: 130px; height: 130px;}
-.guide_wrap li dd{height: 20px; line-height: 20px;}
+.guide_wrap li dd{height: 20px; line-height: 20px; overflow: hidden}
 .guide_wrap li span{color: #999;}
 .guide_wrap li strong{color: #d00000; font-weight: bold;}
 

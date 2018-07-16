@@ -1,3 +1,6 @@
+import re
+import time
+
 import redis
 from django.utils.deprecation import MiddlewareMixin
 
@@ -8,25 +11,28 @@ class AccessAmountMiddleware(MiddlewareMixin):
     """
     访问量中间件
     """
-    conn = redis.Redis(host=SESSION_REDIS['host'], port=SESSION_REDIS['port'], password=SESSION_REDIS['password'])
+    conn = redis.StrictRedis(host=SESSION_REDIS['host'], port=SESSION_REDIS['port'], password=SESSION_REDIS['password'], decode_responses=True)
 
     # 增加访问量并保存redis
     def SaveToRedis(self, name):
-
-        num = int(self.conn.hget('access', name).decode('utf-8')) + 1 if self.conn.hexists('access', name) else 1
-        self.conn.hset('access', name, num)
+        mydict = eval(self.conn.hget('access', time.strftime("%Y-%m-%d")))
+        mydict[name] = mydict[name] + 1
+        self.conn.hset('access', time.strftime("%Y-%m-%d"), mydict)
 
     # 访问量中间件
     def process_request(self, request):
-        if request.path == '/home_page/index/':
+        if not self.conn.hexists('access', time.strftime("%Y-%m-%d")):
+            data = {'首页': 0, '搜索页面': 0, '商品页面': 0, '个人中心页面': 0, '登录页面': 0, '注册页面': 0}
+            self.conn.hset('access', time.strftime("%Y-%m-%d"), data)
+        if request.path == '/index/':
             self.SaveToRedis('首页')
-        if request.path == '/search/':
+        if re.search('/search/', request.path):
             self.SaveToRedis('搜索页面')
-        if request.path == '/goods/':
+        if re.search('/goods/', request.path):
             self.SaveToRedis('商品页面')
-        if request.path == '/user/':
+        if request.path == '/user/user_home/':
             self.SaveToRedis('个人中心页面')
-        if request.path == '/home_page/login/':
+        if request.path == '/user/user_login/':
             self.SaveToRedis('登录页面')
-        if request.path == '/home_page/register/':
+        if request.path == '/user/user_register/':
             self.SaveToRedis('注册页面')

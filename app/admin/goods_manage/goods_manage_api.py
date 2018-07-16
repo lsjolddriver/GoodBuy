@@ -10,7 +10,7 @@ from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # 分页里每页展示的数据数量
-PAGE_DATA_NUMBER = 2
+PAGE_DATA_NUMBER = 20
 
 def goods_list(request):
     # 商品列表

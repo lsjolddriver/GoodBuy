@@ -41,4 +41,4 @@
 .page .page_num{display: inline-block; width: 36px; height: 21px; border-width: 1px; border-style: solid; border-color:#aaa #ddd #ddd #aaa; text-align: center;}
 
 .page .skipsearch{display: inline-block; width: 53px; height: 25px; line-height: 25px; padding:0; border:0; background: url("../images/20130415i.png") -126px -52px; color: #333; text-align: center;}
-.page .skipsearch:hover{background:transparent url("../images/20130415i.png") -126px -52px; color:#333;}
+.page .skipsearch:hover{background:transparent url("/static/images/20130415i.png") -126px -52px; color:#333;}

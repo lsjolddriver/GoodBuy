@@ -19,13 +19,17 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from app import views
 from app.admin.admin_page import admin_page_api
+from app.home.home_page import home_page_api
+from app.home.search import search_api
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('verify_code/', views.verify_code),
     re_path('home_page/', include('app.home.home_page.home_page_urls')),
-    path('search/',include('app.home.search.search_urls')),
+    path('search/',search_api.search_goods),
     path('user/', include('app.home.user.user_urls')),
     path('', include('app.home.goods.goods_urls')),
+    path('index/',home_page_api.index_page),
+    path('/',home_page_api.index_page),
     path('admin_page/', include('app.admin.admin_page.admin_page_urls')),
     path('admin/', admin_page_api.admin_page),
     path('admin_user_manage/', include('app.admin.admin_user_manage.admin_user_manage_urls')),

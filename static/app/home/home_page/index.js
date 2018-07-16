@@ -80,4 +80,11 @@ $(function(){
 		slide();
 	});
 
+
+	$('#search_btn').click(function () {
+		var key = $('#search_text').val();
+        $.get("/search",{'key':key},function () {
+			alert(1)
+        })
+    })
 });

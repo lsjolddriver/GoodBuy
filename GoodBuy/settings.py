@@ -144,8 +144,14 @@ SESSION_REDIS = {
     'db': 1,
     'password': 'root',
     'prefix': 'good_buy',
-    'socket_timeout': 3600
+    'socket_timeout': 600
 }
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# 七牛云
+ACCESS_KEY = 'YiM-RmkMVh_XzfIh3IHHt3S1Icd_mTNmXn3ZweE7'
+QINIU_SECRET_KEY = 'yzlPF4Gguw0z341cdoPdYEbC043UmpF1LlVRnP0t'
+BUCKET_NAME = 'goodbuy'
+AVATAR_DIR = '/static/images/icon.jpg'
