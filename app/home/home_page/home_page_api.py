@@ -3,6 +3,8 @@
 AUTH:
 DATE:
 """
+import random
+
 from django.shortcuts import render
 from django.http.response import HttpResponse
 
@@ -17,7 +19,8 @@ def index_page(request):
         # 小类分类
         subclassification = Subclassification.objects.all()
         # 商品
-        goods = Goods.objects.all()
+        mylist = [random.randint(34,26124) for _ in range(30)]
+        goods = Goods.objects.filter(id__in=mylist)
         # 热门搜索
         hots = Hot.objects.all()
 

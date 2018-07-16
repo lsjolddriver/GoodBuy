@@ -25,7 +25,7 @@
 /*服务区域 css 包括话费，旅行，彩票，游戏*/
 .service{height:170px; clear: both; overflow: hidden; }
 .service h2{height: 30px; line-height: 30px; border: 1px solid #ddd; border-bottom: 0; border-radius: 5px 5px 0 0; -webkit-border-radius:5px 5px 0 0;}
-.service h2 span{float:left; display: inline; width: 76px; text-align: center; background: url("../images/bg1.png") 0 -32px repeat-x ; border: 1px solid #ddd; border-top:0; border-left: 0;}
+.service h2 span{float:left; display: inline; width: 76px; text-align: center; background: url("/static/images/bg1.png") 0 -32px repeat-x ; border: 1px solid #ddd; border-top:0; border-left: 0;}
 .service h2 span.title1{border-radius: 5px 0 0 0;}
 .service h2 span.title4{border-radius: 0 5px 0 0; border-right: 0;padding-right: 1px;}
 .service h2 a{font:bold 14px "microsoft yahei";line-height: 30px; }
@@ -52,7 +52,7 @@
 .guide{height: 271px;}
 .guide_content{width: 890px;}
 .guide_content h2{height: 38px; line-height: 38px; border-top: 2px solid #d00000; border-left: 1px solid #ddd; }
-.guide_content h2 span{float: left; display: inline; width:177px; cursor: pointer; border:1px solid #ddd; border-top: 0; border-left: 0; background: url("../images/bg1.png") 0 -73px repeat-x;   text-align: center; font:bold 14px/38px "microsoft yahei";}
+.guide_content h2 span{float: left; display: inline; width:177px; cursor: pointer; border:1px solid #ddd; border-top: 0; border-left: 0; background: url("/static/images/bg1.png") 0 -73px repeat-x;   text-align: center; font:bold 14px/38px "microsoft yahei";}
 .guide_content h2 span.last{width: 176px;}
 .guide_content h2 span.on{background: none; border-bottom: 0; color:#c30;}
 
@@ -60,7 +60,7 @@
 .guide_wrap div{width: 868px; height: 210px; padding:15px 10px 5px;}
 .guide_wrap li{width: 170px; height: 210px;float: left; display: inline; text-align: center;}
 .guide_wrap li dt img{width: 130px; height: 130px;}
-.guide_wrap li dd{height: 20px; line-height: 20px;}
+.guide_wrap li dd{height: 20px; line-height: 20px; overflow: hidden}
 .guide_wrap li span{color: #999;}
 .guide_wrap li strong{color: #d00000; font-weight: bold;}
 
@@ -82,7 +82,7 @@
 .guide .sidebar_wrap .first img{margin-right: 5px;}
 .guide .sidebar_wrap dd{line-height: 17px;}
 .guide .sidebar_wrap dd strong{font-weight:bold; font-size: 13px;}
-.guide .sidebar_wrap dd em{ display: inline-block; width:28px; height: 16px; padding-left: 8px; line-height: 16px; background: url("../images/bg2.png") -265px -536px no-repeat; color: #fff;}
+.guide .sidebar_wrap dd em{ display: inline-block; width:28px; height: 16px; padding-left: 8px; line-height: 16px; background: url("/static/images/bg2.png") -265px -536px no-repeat; color: #fff;}
 
 /*各楼层商品css*/
 /*通用css*/
@@ -90,7 +90,7 @@
 .floor_left{width: 890px; }
 .cate{width: 210px; height: 441px; }
 .goodslist{width: 680px;}
-.cate h2{width: 210px; height: 40px; line-height: 40px; background: url("../images/bg2.png") 0 -342px no-repeat; text-align: center; font-size: 16px; font-weight: bold; color: #fff;}
+.cate h2{width: 210px; height: 40px; line-height: 40px; background: url("/static/images/bg2.png") 0 -342px no-repeat; text-align: center; font-size: 16px; font-weight: bold; color: #fff;}
 .cate_wrap{width: 208px; height: 400px; border:1px solid #2E82D0; border-top: 0; overflow: hidden; position: relative;}
 .cate_wrap ul{width:195px; padding:10px 0 0 13px;}
 .cate_wrap li{float: left; display: inline; margin: 0;}
@@ -101,7 +101,7 @@
 .cate_wrap p img{width: 208px; height: 170px;}
 .goodslist h2{width:680px; height: 38px; border-top: 2px solid #2E82D0;}
 .goodslist_wrap{width: 664px; height: 400px; padding-left: 15px; border: 1px solid #ddd; border-top: 0; border-left: 0;}
-.goodslist h2 span{float: left; display: inline; width: 135px; border:1px solid #ddd; border-top: 0; border-left: 0; background: url("../images/bg1.png") 0 -73px repeat-x;  text-align: center; font:bold 14px/37px "microsoft yahei"; cursor:pointer;}
+.goodslist h2 span{float: left; display: inline; width: 135px; border:1px solid #ddd; border-top: 0; border-left: 0; background: url("/static/images/bg1.png") 0 -73px repeat-x;  text-align: center; font:bold 14px/37px "microsoft yahei"; cursor:pointer;}
 .goodslist h2 span.on{background: none; border-bottom: 0; color:#2E82D0;}
 
 .goodslist_wrap li{width: 165px; float: left; display: inline; height: 188px; text-align: center; padding-top: 10px;}

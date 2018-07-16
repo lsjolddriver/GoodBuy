@@ -5,16 +5,18 @@
 */
 /* 注意，要在页面中先引入jquery*/
 $(function(){
-	//搜索框，注意此处，获取文本框的默认值使用defaultValue属性，但是只能通过this.defaultValue，不能使用$(this).defalutValue。
-	$(".search_form .txt").focus(function(){
-		if ($(this).val() == this.defaultValue){
-			$(this).val("").css({color:"#333"});
-		}	
-	}).blur(function(){
-		if ($(this).val() == ""){
-			$(this).val(this.defaultValue).css({color:"#999"});
-		}
-	});
+	// 热门比价
+	$.get("/admin_page/main_hotword/",function (data) {
+        if(data.code == '200') {
+            hot_search = $('.hot_search');
+            var hot_search_html = '<strong>热门搜索:</strong>';
+			for(var i =0; i < data.hotwords.length; i++) {
+				hot_search_html += '<a href="/search?key='+data.hotwords[i].name+'">&nbsp;&nbsp;'+data.hotwords[i].name+'&nbsp;&nbsp;</a>'
+            }
+            hot_search.html(hot_search_html);
+        }
+    },'json')
+
 	//头部用户
 	$(".user").mouseover(function(){
 		$(this).find("dd").show();

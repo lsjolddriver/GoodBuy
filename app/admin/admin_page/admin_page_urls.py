@@ -17,6 +17,7 @@ urlpatterns = [
     path('menu/', admin_page_api.admin_menu),
     # 访问量
     path('main_access/', admin_page_api.admin_main_access),
+    path('main_access2/', admin_page_api.admin_main_access2),
     # 热门对比
     path('main_hotword/', admin_page_api.admin_main_hotword),
     # 商品收藏统计

@@ -4,3 +4,4 @@ pillow
 redis
 django-redis-sessions
 djangorestframework
+qiniu

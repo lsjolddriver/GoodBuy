@@ -47,6 +47,18 @@
 {#        </tr>#}
     </table>
     <div id="Amount_of_access_form" style="width: 1100px;height:300px;"></div>
+    <div>
+
+    </div>
+    <div style="height: 30px; background: #BBDDE5">
+        <input id="date_input" type="date"  min="2018-07-10"  onchange="time_access_change()">
+        <select id="data_select" onchange="date_access_change()">
+            <option value="1">最近7天</option>
+            <option value="2">最近30天</option>
+            <option value="3">最近90天</option>
+        </select>
+    </div>
+        <div id="Amount_of_access2_form" style="width: 1100px;height:300px;"></div>
     </div>
 <!-- end order statistics -->
 <br />

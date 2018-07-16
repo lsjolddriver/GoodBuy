@@ -11,6 +11,7 @@ urlpatterns = [
     path(r'user_home/', user_api.user_home, name='user_home'),
     path(r'user_collection/', user_api.user_collection, name='user_collection'),
     path(r'user_comment/', user_api.user_comment, name='user_comment'),
+    path(r'user_icon/', user_api.user_icon, name='user_icon'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

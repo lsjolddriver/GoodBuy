@@ -851,3 +851,12 @@ em, cite, th {
 .cloud_close a{}
 .cloud_close img{ position:absolute; right:10px; top:8px; border:none}
 .Start315{border: 1px solid #CC0000; background: #ffffcc; padding: 10px; margin-bottom: 5px;}
+
+#date_input{
+  margin: 4px 0 0 20px;
+}
+#data_select{
+  position: absolute;
+  height: 22px;
+  margin: 4px 0 0 40px;
+}
