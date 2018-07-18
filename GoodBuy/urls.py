@@ -29,7 +29,7 @@ urlpatterns = [
     path('user/', include('app.home.user.user_urls')),
     path('', include('app.home.goods.goods_urls')),
     path('index/',home_page_api.index_page),
-    path('/',home_page_api.index_page),
+    path('',home_page_api.index_page),
     path('admin_page/', include('app.admin.admin_page.admin_page_urls')),
     path('admin/', admin_page_api.admin_page),
     path('admin_user_manage/', include('app.admin.admin_user_manage.admin_user_manage_urls')),

@@ -9,9 +9,11 @@ from django.shortcuts import render
 from django.http.response import HttpResponse
 
 # 首页
+from django.views.decorators.cache import cache_page
+
 from app.models import Classification, Subclassification, Goods, Hot
 
-
+@cache_page(60*10)
 def index_page(request):
     if request.method == 'GET':
         # 大类分类

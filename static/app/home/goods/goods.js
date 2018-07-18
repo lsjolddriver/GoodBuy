@@ -10,7 +10,7 @@ $(document).ready(function () {
             data: {
                 id: data.data.id,
                 price: data.data.c_price,
-                img_url: '/static/' + data.data.image,
+                img_url: data.data.image,
                 c_amount: data.data.comments_amount,
                 s_number: data.data.sales_number,
             },

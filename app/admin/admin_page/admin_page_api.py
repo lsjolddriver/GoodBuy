@@ -31,7 +31,7 @@ def login(request):
             data['code'] = 1001
             data['msg'] = '参数错误'
             return render(request, 'admin/login.html', data)
-        if v_code != request.session['v_code']:
+        if v_code.lower() != request.session['v_code']:
             data['code'] = 1002
             data['msg'] = '验证码错误'
             return render(request, 'admin/login.html', data)
@@ -101,7 +101,6 @@ def admin_main_access(request):
         return JsonResponse(data)
 
 # 各时间段访问量统计
-@is_login
 @require_GET
 def admin_main_access2(request):
     data = {}

@@ -309,14 +309,20 @@
                     {% ifequal p page %}
                         <a href="/search?key={{ key }}&sort=0&brand={{ brand }}&page={{ p }}" class="cur">{{ p }}</a>
                     {% else %}
-                        <a href="/search?key={{ key }}&sort=0&brand={{ brand }}&page={{ p }}">{{ p }}</a>
+                        {% if p %}
+                            <a href="/search?key={{ key }}&sort=0&brand={{ brand }}&page={{ p }}">{{ p }}</a>
+                        {% else %}
+                            ...
+                        {% endif %}
                     {% endifequal %}
                 {% endfor %}
 				<a href="/search?key={{ key }}&sort=0&brand={{ brand }}&page={{ page|add:1}}">下一页</a>
 				<a href="/search?key={{ key }}&sort=0&brand={{ brand }}&page={{ page_num }}">尾页</a>&nbsp;&nbsp;
 				<span>
-					<em>共{{ page_num }}页&nbsp;&nbsp;到第 <input type="text" class="page_num" value="3"/> 页</em>
-					<a href="" class="skipsearch" href="javascript:;">确定</a>
+					<em>共{{ page_num }}页&nbsp;&nbsp;到第
+                        <input type="text" class="page_num" value="{{ page }}"> 页
+                    </em>
+					<input style="cursor: pointer" onclick="page_text({{ key }},{{ sort }},{{ brand }})" class="skipsearch" type="button" value="确定">
 				</span>
 			</div>
 			<!-- 分页信息 end -->
