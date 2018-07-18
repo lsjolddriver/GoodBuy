@@ -5,3 +5,4 @@ redis
 django-redis-sessions
 djangorestframework
 qiniu
+django-redis

@@ -13,7 +13,7 @@ class UserMiddle(MiddlewareMixin):
     def process_request(request):
 
         # 需要登录验证的URL
-        need_login = ['/user/user_home/','/user/icon/']
+        need_login = ['/user/user_home/', '/user/icon/', '/user_logout/', '/user_collection/', '/user_comment/']
         if request.path in need_login:
             # 先获取cookies中的ticket参数
             ticket = request.COOKIES.get('ticket')

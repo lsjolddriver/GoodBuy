@@ -12,7 +12,7 @@ from django.shortcuts import render
 from django.http.response import HttpResponse, JsonResponse
 from django.views.decorators.http import require_GET
 
-from app.models import Goods, Classification, Subclassification, Hot
+from app.models import Goods, Hot
 
 
 def index(request):
@@ -32,16 +32,16 @@ def search_goods(request):
         brands = None
     else:
         # 过滤
-        filter_key = re.sub('[^\u4e00-\u9fa5_a-zA-Z0-9]', '', key)
+        # key = re.sub('[^\u4e00-\u9fa5_a-zA-Z0-9]', '', key)
 
-        if Hot.objects.filter(word=filter_key).first():
-            hot = Hot.objects.filter(word=filter_key).first()
+        if Hot.objects.filter(word=key).first():
+            hot = Hot.objects.filter(word=key).first()
             hot.count += 1
             hot.save()
         else:
-            Hot.objects.create(word=filter_key, count=1)
+            Hot.objects.create(word=key, count=1)
 
-        goods = Goods.objects.filter(name__icontains=filter_key)
+        goods = Goods.objects.filter(name__icontains=key)
         brands = goods.filter(brand__isnull=False).values('brand__name').annotate(Count('brand'))
 
     # 筛选
@@ -49,7 +49,21 @@ def search_goods(request):
         goods = goods.filter(brand__name=brand)
 
     page_num = (len(goods)//20)+1
-    page_list = list(range(1,page_num+1))
+
+    if page < 0 or page > page_num:
+        page_list=[]
+    if page_num <= 7:
+        page_list = list(range(1,page_num+1))
+    elif page <= 5:
+        page_list = list(range(1,8))
+        page_list.append(None)
+    elif page_num - page > 3:
+        page_list = [1, 2, None] + list(range(page-2, page+3))
+        page_list.append(None)
+    else:
+        page_list = [1, 2, None] + list(range(page_num-4, page_num+1))
+
+
 
     if sort == '0':
         # 默认排序

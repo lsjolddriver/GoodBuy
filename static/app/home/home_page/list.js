@@ -15,3 +15,10 @@ $(function(){
 		$(this).toggleClass("on").parent().find("ul").toggle();
 	});
 });
+function page_text(key,sort,brand){
+	alert(1)
+	var page = $('.page_num').val();
+	$.get('/search', {'key':key, 'sort':sort,'brand':brand, 'page':page},function () {
+		alert(2)
+    })
+}

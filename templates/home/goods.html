@@ -254,7 +254,7 @@
 				<!-- 图片预览区域 start -->
 				<div class="preview fl">
 					<div class="midpic">
-						<a href="{% static 'images/preview_l1.jpg' %}" class="jqzoom" rel="gal1">   <!-- 第一幅图片的大图 class 和 rel属性不能更改 -->
+						<a href="#" class="jqzoom" rel="gal1">   <!-- 第一幅图片的大图 class 和 rel属性不能更改 -->
 							<img v-bind:src="img_url" alt="" />               <!-- 第一幅图片的中图 -->
 						</a>
 					</div>
@@ -319,8 +319,12 @@
 					<div class="comment detail_div none">
                     <div id="comment-vue">
 						<div class="comment_summary">
+
 							<div class="rate fl">
-								<strong><em>${good_comments_percent}</em>%</strong> <br />
+								<strong>
+                                    <em v-if="comments_data">${good_comments_percent}%</em>
+                                    <em v-else></em>
+                                </strong> <br />
 								<span>好评度</span>
 							</div>
 							<div class="percent fl">

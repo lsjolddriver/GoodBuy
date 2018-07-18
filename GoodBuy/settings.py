@@ -132,12 +132,7 @@ STATICFILES_DIRS = [
 
 SESSION_ENGINE = 'redis_sessions.session'
 
-# SESSION_REDIS_HOST = '118.25.211.249'
-# SESSION_REDIS_PORT = 6379
-# SESSION_REDIS_DB = 1
-# SESSION_REDIS_PASSWORD = 'root'
-# SESSION_REDIS_PREFIX = 'News_hodge'
-
+# redis-session缓存
 SESSION_REDIS = {
     'host': '118.25.211.249',
     'port': 6379,
@@ -155,3 +150,15 @@ ACCESS_KEY = 'YiM-RmkMVh_XzfIh3IHHt3S1Icd_mTNmXn3ZweE7'
 QINIU_SECRET_KEY = 'yzlPF4Gguw0z341cdoPdYEbC043UmpF1LlVRnP0t'
 BUCKET_NAME = 'goodbuy'
 AVATAR_DIR = '/static/images/icon.jpg'
+
+# redis 站点数据缓存
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://118.25.211.249:6379/2',
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+             "PASSWORD": "root",
+        },
+    },
+}
